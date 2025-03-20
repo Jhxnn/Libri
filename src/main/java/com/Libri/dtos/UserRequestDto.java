@@ -1,4 +1,6 @@
 package com.Libri.dtos;
 
-public record UserRequestDto() {
+import com.Libri.models.enums.UserRole;
+
+public record UserRequestDto(String name, String email, String password, String cpf, UserRole role) {
 }
