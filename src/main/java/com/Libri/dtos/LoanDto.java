@@ -1,4 +1,7 @@
 package com.Libri.dtos;
 
-public record LoanDto() {
+import java.time.LocalDate;
+import java.util.UUID;
+
+public record LoanDto(LocalDate startDate, LocalDate endDate, UUID userId, UUID bookId) {
 }

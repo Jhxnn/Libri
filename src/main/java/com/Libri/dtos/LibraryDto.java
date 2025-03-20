@@ -1,4 +1,4 @@
 package com.Libri.dtos;
 
-public record LibraryDto() {
+public record LibraryDto(String location, String name) {
 }

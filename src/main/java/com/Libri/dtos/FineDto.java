@@ -1,4 +1,7 @@
 package com.Libri.dtos;
 
-public record FineDto() {
+import java.sql.Timestamp;
+import java.util.UUID;
+
+public record FineDto(UUID userId, double value, Timestamp time) {
 }
