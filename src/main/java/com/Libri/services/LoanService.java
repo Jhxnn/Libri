@@ -2,6 +2,8 @@ package com.Libri.services;
 
 import com.Libri.dtos.LoanDto;
 import com.Libri.models.Loan;
+import com.Libri.models.enums.BookStatus;
+import com.Libri.repositories.BookRepository;
 import com.Libri.repositories.LoanRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ public class LoanService {
     @Autowired
     BookService bookService;
 
+    @Autowired
+    BookRepository bookRepository;
+
     public List<Loan> findAll(){
         return loanRepository.findAll();
     }
@@ -37,9 +42,13 @@ public class LoanService {
     public Loan createLoan(LoanDto loanDto){
         var loan = new Loan();
         BeanUtils.copyProperties(loanDto,loan);
+        var book = bookService.findById(loanDto.bookId());
+        book.setStatus(BookStatus.UNAVAILABLE);
+        bookRepository.save(book);
         emailService.enviarEmailTexto(userService.findById(loanDto.userId()).email(),
                 "Empréstimo de Livro",
                 "Você retirou o Livro: " + bookService.findById(loanDto.bookId()).getTittle() + ". Data de devolução: " + loan.getEndDate());
+
         return loanRepository.save(loan);
     }
 
