@@ -16,6 +16,7 @@ public class Loan {
 
     private LocalDate startDate;
 
+
     private LocalDate endDate;
 
     @ManyToOne

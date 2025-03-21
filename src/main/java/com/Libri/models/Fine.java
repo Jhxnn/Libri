@@ -3,6 +3,7 @@ package com.Libri.models;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -20,7 +21,7 @@ public class Fine {
 
     private double value;
 
-    private Timestamp time;
+    private LocalDate time;
 
     public UUID getFineId() {
         return fineId;
@@ -46,11 +47,11 @@ public class Fine {
         this.value = value;
     }
 
-    public Timestamp getTime() {
+    public int getTime() {
         return time;
     }
 
-    public void setTime(Timestamp time) {
+    public void setTime(int time) {
         this.time = time;
     }
 }
