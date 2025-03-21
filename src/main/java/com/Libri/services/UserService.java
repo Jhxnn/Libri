@@ -3,6 +3,7 @@ package com.Libri.services;
 
 import com.Libri.dtos.UserRequestDto;
 import com.Libri.dtos.UserResponseDto;
+import com.Libri.models.User;
 import com.Libri.repositories.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,11 @@ public class UserService {
         return new UserResponseDto(user.getUserid(), user.getName(), user.getEmail());
 
     }
+
+    public User findById1(UUID id){
+        return userRepository.findById(id).orElseThrow(()-> new RuntimeException("Cannot be found"));
+    }
+
     public void deleteUser(UUID id) {
         var user = userRepository.findById(id).orElseThrow(()-> new RuntimeException("Cannot be found"));
         userRepository.delete(user);

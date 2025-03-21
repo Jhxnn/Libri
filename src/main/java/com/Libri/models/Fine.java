@@ -47,11 +47,11 @@ public class Fine {
         this.value = value;
     }
 
-    public int getTime() {
+    public LocalDate getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(LocalDate time) {
         this.time = time;
     }
 }

@@ -22,6 +22,9 @@ public class FineService {
     @Autowired
     UserService userService;
 
+    @Autowired
+    LoanService loanService;
+
 
     public List<Fine> findAll(){
         return fineRepository.findAll();
@@ -37,9 +40,14 @@ public class FineService {
 
     public Fine createFine(FineDto fineDto){
         var fine = new Fine();
+
         BeanUtils.copyProperties(fineDto,fine);
-        var user = userService.findById(fineDto.userId());
+
+        var user = userService.findById1(fineDto.userId());
+        var loan = loanService.findByUser(user.getUserid());
+
         return fineRepository.save(fine);
+
     }
 
 //    public Fine updateFine(){

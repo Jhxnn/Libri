@@ -1,13 +1,13 @@
 package com.Libri.services;
 
 import com.Libri.dtos.LoanDto;
+import com.Libri.models.Fine;
 import com.Libri.models.Loan;
 import com.Libri.models.enums.BookStatus;
 import com.Libri.repositories.BookRepository;
 import com.Libri.repositories.LoanRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -61,5 +61,10 @@ public class LoanService {
     public void deleteLoan(UUID id){
         var loan = findById(id);
         loanRepository.delete(loan);
+    }
+
+    public Loan findByUser(UUID userId){
+        var user = userService.findById1(userId);
+        return loanRepository.findByUser(user);
     }
 }
