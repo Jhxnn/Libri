@@ -15,8 +15,11 @@ public class Book {
     @Column(name = "id")
     private UUID bookId;
 
+    private String googleBookId;
+
     private String tittle;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     private String author;
@@ -29,6 +32,14 @@ public class Book {
 
     public UUID getBookId() {
         return bookId;
+    }
+
+    public String getGoogleBookId() {
+        return googleBookId;
+    }
+
+    public void setGoogleBookId(String googleBookId) {
+        this.googleBookId = googleBookId;
     }
 
     public void setBookId(UUID bookId) {

@@ -19,8 +19,8 @@ public class Loan {
     private LocalDate endDate;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "id", name = "user")
-    private User user;
+    @JoinColumn(referencedColumnName = "id", name = "user_id")
+    private User userId;
 
     @ManyToOne
     @JoinColumn(name = "book", referencedColumnName = "id")
@@ -51,11 +51,11 @@ public class Loan {
     }
 
     public User getUser() {
-        return user;
+        return userId;
     }
 
     public void setUser(User user) {
-        this.user = user;
+        this.userId = user;
     }
 
     public Book getBook() {

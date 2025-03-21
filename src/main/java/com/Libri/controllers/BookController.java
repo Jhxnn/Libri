@@ -1,8 +1,10 @@
 package com.Libri.controllers;
 
 import com.Libri.dtos.BookDto;
+import com.Libri.dtos.GoogleBookDto;
 import com.Libri.models.Book;
 import com.Libri.services.BookService;
+import com.Libri.services.GoogleBooksService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,9 +21,17 @@ public class BookController {
     @Autowired
     BookService bookService;
 
+    @Autowired
+    GoogleBooksService googleBooksService;
+
     @GetMapping("/{id}")
     public ResponseEntity<Book> findById(@PathVariable(name = "id") UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(bookService.findById(id));
+    }
+
+    @GetMapping("/search")
+    public List<GoogleBookDto> searchBooks(@RequestParam String query) {
+        return googleBooksService.searchBooks(query);
     }
 
     @GetMapping

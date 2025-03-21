@@ -15,8 +15,8 @@ public class Fine {
     private UUID fineId;
 
     @ManyToOne
-    @JoinColumn(name = "user", referencedColumnName = "id")
-    private User user;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User userId;
 
     private double value;
 
@@ -31,11 +31,11 @@ public class Fine {
     }
 
     public User getUser() {
-        return user;
+        return userId;
     }
 
     public void setUser(User user) {
-        this.user = user;
+        this.userId = user;
     }
 
     public double getValue() {
