@@ -17,6 +17,14 @@ public class LoanService {
     @Autowired
     LoanRepository loanRepository;
 
+    @Autowired
+    com.picpay_desafio.services.EmailService emailService;
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    BookService bookService;
 
     public List<Loan> findAll(){
         return loanRepository.findAll();
@@ -29,6 +37,9 @@ public class LoanService {
     public Loan createLoan(LoanDto loanDto){
         var loan = new Loan();
         BeanUtils.copyProperties(loanDto,loan);
+        emailService.enviarEmailTexto(userService.findById(loanDto.userId()).email(),
+                "Empréstimo de Livro",
+                "Você retirou o Livro: " + bookService.findById(loanDto.bookId()).getTittle() + ". Data de devolução: " + loan.getEndDate());
         return loanRepository.save(loan);
     }
 
