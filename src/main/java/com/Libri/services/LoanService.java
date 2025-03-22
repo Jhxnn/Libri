@@ -20,7 +20,7 @@ public class LoanService {
     LoanRepository loanRepository;
 
     @Autowired
-    com.picpay_desafio.services.EmailService emailService;
+    EmailService emailService;
 
     @Autowired
     UserService userService;
@@ -65,6 +65,6 @@ public class LoanService {
 
     public Loan findByUser(UUID userId){
         var user = userService.findById1(userId);
-        return loanRepository.findByUser(user);
+        return loanRepository.findByUserId(user);
     }
 }

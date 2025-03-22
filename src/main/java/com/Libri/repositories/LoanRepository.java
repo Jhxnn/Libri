@@ -9,5 +9,5 @@ import java.util.UUID;
 
 public interface LoanRepository extends JpaRepository<Loan, UUID> {
 
-    Loan findByUser(User user);
+    Loan findByUserId(User user);
 }
