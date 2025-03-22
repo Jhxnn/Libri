@@ -62,10 +62,6 @@ public class FineService {
 
     }
 
-//    public Fine updateFine(){
-//        fineRepos
-//    }
-
     public void deleteFine(UUID id){
         var fine = findById(id);
         fineRepository.delete(fine);

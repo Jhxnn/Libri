@@ -34,11 +34,6 @@ public class FineController {
         return ResponseEntity.status(HttpStatus.CREATED).body(fineService.createFine(fineDto));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Fine> updateFine(@PathVariable(name = "id")UUID id,
-                                           @RequestBody FineDto fineDto){
-        return ResponseEntity.status(HttpStatus.CREATED).body(fineService.updateFine(fineDto, id));
-    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Fine> deleteFine(@PathVariable(name = "id")UUID id){
