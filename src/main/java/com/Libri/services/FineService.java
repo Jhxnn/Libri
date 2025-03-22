@@ -39,23 +39,25 @@ public class FineService {
 
 
 
-    //FAZER LOGICA PARA CALCULAR A MULTA BASEADA NA DATA DE FIM DO LOAN E NA DATA ATUAL DA REQUISIÇÃO
 
     public Fine createFine(FineDto fineDto){
 
         var fine = new Fine();
-        BeanUtils.copyProperties(fineDto,fine);
         var user = userService.findById1(fineDto.userId());
         var loan = loanService.findByUser(user.getUserid());
         long dias = ChronoUnit.DAYS.between(loan.getEndDate(), LocalDate.now());
+
         if(dias > 0) {
-            fine.setValue(dias);
+            fine.setValue(dias * 2.5);
             fine.setTime(LocalDate.now());
             fine.setUser(user);
             return fineRepository.save(fine);
+
         }
 
-        return null;
+        fine.setTime(LocalDate.now());
+        fine.setUser(user);
+        return fineRepository.save(fine);
 
 
     }
