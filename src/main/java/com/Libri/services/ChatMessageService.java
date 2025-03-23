@@ -20,4 +20,7 @@ public class ChatMessageService {
         BeanUtils.copyProperties(chatDto, chatMessage);
         return chatMessageRepository.save(chatMessage);
     }
+
+
+
 }
