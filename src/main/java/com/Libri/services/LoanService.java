@@ -45,10 +45,13 @@ public class LoanService {
         var book = bookService.findById(loanDto.bookId());
         book.setStatus(BookStatus.UNAVAILABLE);
         bookRepository.save(book);
-        emailService.enviarEmailTexto(userService.findById(loanDto.userId()).email(),
-                "Empréstimo de Livro",
-                "Você retirou o Livro: " + bookService.findById(loanDto.bookId()).getTittle() + ". Data de devolução: " + loan.getEndDate());
+        var user = userService.findById1((loanDto.userId()));
+        emailService.enviarEmailTexto(user.getEmail(),
+                "Empréstimo de Livro: " + book.getTittle(),
+                "Você retirou o Livro: " + bookService.findById(loanDto.bookId())   .getTittle() + "\nData de retirada: " + loan.getStartDate() + ".\nData de devolução: " + loan.getEndDate());
 
+        loan.setBook(book);
+        loan.setUser(user);
         return loanRepository.save(loan);
     }
 

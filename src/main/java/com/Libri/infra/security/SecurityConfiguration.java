@@ -29,6 +29,8 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.POST, "/user/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/user/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/loan").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/fine").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/book").permitAll()
                         .requestMatchers(HttpMethod.POST).hasRole("ADMIN")
                         .anyRequest().permitAll()
                 )
