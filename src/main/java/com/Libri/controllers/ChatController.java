@@ -22,9 +22,9 @@ public class ChatController {
     ChatMessageService chatMessageService;
 
 
-    @Operation(description = "Chat aberto")
     @MessageMapping("/chat")
     @SendTo("/topic/messages")
+    @Operation(description = "Chat aberto")
     public ChatMessage send(ChatDto chatDto){
 
         return chatMessageService.createMessage(chatDto);
@@ -33,8 +33,8 @@ public class ChatController {
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
-    @Operation(description = "Chat privado")
     @MessageMapping("/private-message")
+    @Operation(description = "Chat privado")
     public void sendPrivateMessage(PrivateMessageDto message) {
         messagingTemplate.convertAndSendToUser(
                 message.to(),

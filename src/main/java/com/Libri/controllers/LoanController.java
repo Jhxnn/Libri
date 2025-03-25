@@ -1,8 +1,11 @@
 package com.Libri.controllers;
 
 import com.Libri.dtos.LibraryDto;
+import com.Libri.dtos.LoanDto;
 import com.Libri.models.Library;
+import com.Libri.models.Loan;
 import com.Libri.services.LibraryService;
+import com.Libri.services.LoanService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,42 +21,42 @@ import java.util.UUID;
 public class LoanController {
 
     @Autowired
-    LibraryService libraryService;
+    LoanService loanService;
 
 
     @Operation(description = "Lista emprestimo pelo ID")
     @GetMapping("/{id}")
-    public ResponseEntity<Library> findById(@PathVariable(name = "id") UUID id){
-        return ResponseEntity.status(HttpStatus.OK).body(libraryService.findById(id));
+    public ResponseEntity<Loan> findById(@PathVariable(name = "id") UUID id){
+        return ResponseEntity.status(HttpStatus.OK).body(loanService.findById(id));
     }
 
 
     @Operation(description = "Lista todos os emprestimos")
     @GetMapping
-    public ResponseEntity<List<Library>> findAll(){
-        return ResponseEntity.status(HttpStatus.OK).body(libraryService.findAll());
+    public ResponseEntity<List<Loan>> findAll(){
+        return ResponseEntity.status(HttpStatus.OK).body(loanService.findAll());
     }
 
 
     @Operation(description = "Cria um emprestimo")
     @PostMapping
-    public ResponseEntity<Library> createLibrary(@RequestBody LibraryDto libraryDto){
-        return ResponseEntity.status(HttpStatus.CREATED).body(libraryService.createLibrary(libraryDto));
+    public ResponseEntity<Loan> createLoan(@RequestBody LoanDto loanDto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(loanService.createLoan(loanDto));
     }
 
 
     @Operation(description = "Atualiza um emprestimo")
     @PutMapping("/{id}")
-    public ResponseEntity<Library> updateLibrary(@PathVariable(name = "id")UUID id,
-                                                 @RequestBody LibraryDto libraryDto){
-        return ResponseEntity.status(HttpStatus.CREATED).body(libraryService.updateLibrary(libraryDto, id));
+    public ResponseEntity<Loan> updateLoan(@PathVariable(name = "id")UUID id,
+                                                 @RequestBody LoanDto loanDto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(loanService.updateLoan(loanDto, id));
     }
 
 
     @Operation(description = "Deleta um emprestimo")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Library> deleteLibrary(@PathVariable(name = "id")UUID id){
-        libraryService.deleteLibrary(id);
+    public ResponseEntity<Loan> deleteLoan(@PathVariable(name = "id")UUID id){
+        loanService.deleteLoan(id);
         return ResponseEntity.noContent().build();
     }
 }

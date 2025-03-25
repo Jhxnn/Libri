@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-
+@RestController
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -27,14 +28,14 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userService.findAll());
     }
 
-    @Operation(description="Lista usuario pelo id")
     @GetMapping("/{id}")
+    @Operation(description="Lista usuario pelo id")
     public ResponseEntity<UserResponseDto> findById(@PathVariable(name = "id") UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(userService.findById(id));
     }
 
-    @Operation(description="Registra um usuario")
     @PostMapping("/register")
+    @Operation(description="Registra um usuario")
     public ResponseEntity<UserResponseDto> createUser(@RequestBody UserRequestDto userRequestDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(userRequestDto));
     }
