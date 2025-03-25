@@ -45,6 +45,12 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.OK).body(bookService.findAll());
     }
 
+    @Operation(description = "Lista todos os livros de uma biblioteca")
+    @GetMapping("/library/{libraryId}")
+    public ResponseEntity<List<Book>> findByLibrary(@PathVariable(name = "libraryId")UUID id){
+        return ResponseEntity.status(HttpStatus.OK).body(bookService.findByLibrary(id));
+    }
+
 
     @Operation(description = "Registra livro")
     @PostMapping
@@ -59,6 +65,7 @@ public class BookController {
                                            @RequestBody BookDto bookDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(bookService.updateBook(bookDto, id));
     }
+
 
 
     @Operation(description = "Deleta um livro")

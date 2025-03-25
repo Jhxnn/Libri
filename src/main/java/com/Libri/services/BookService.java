@@ -45,6 +45,11 @@ public class BookService {
         return bookRepository.save(book);
     }
 
+    public List<Book> findByLibrary(UUID id){
+        var library = libraryService.findById(id);
+        return bookRepository.findByLibrary(library);
+    }
+
     public Book updateBook(BookDto bookDto, UUID id){
         var book = findById(id);
         BeanUtils.copyProperties(bookDto,book);
