@@ -13,6 +13,8 @@ target/
 .springBeans
 .sts4-cache
 src/main/resources/application.properties
+.Dockerfile
+docker-compose.yml
 
 ### IntelliJ IDEA ###
 .idea
